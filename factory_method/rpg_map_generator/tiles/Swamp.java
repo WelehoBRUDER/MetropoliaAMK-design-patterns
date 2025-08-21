@@ -1,12 +1,11 @@
 package rpg_map_generator.tiles;
 import rpg_map_generator.Tile;
 
-public class Swamp implements Tile {
-    public String getCharacter() {
-        return "^";
+public class Swamp extends Tile {
+    public Swamp() {
+        character = "^";
+        type = "Swamp";
     }
-
-    public String getType() {
-        return "Swamp";
+    public void action() {
     }
 }

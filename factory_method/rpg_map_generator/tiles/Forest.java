@@ -1,12 +1,12 @@
 package rpg_map_generator.tiles;
 import rpg_map_generator.Tile;
 
-public class Forest implements Tile {
-    public String getCharacter() {
-        return "#";
+public class Forest extends Tile {
+    public Forest() {
+        character = "#";
+        type = "Forest";
     }
-
-    public String getType() {
-        return "Forest";
+    public void action() {
     }
 }
+

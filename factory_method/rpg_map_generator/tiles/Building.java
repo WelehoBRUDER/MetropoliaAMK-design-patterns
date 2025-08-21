@@ -1,12 +1,11 @@
 package rpg_map_generator.tiles;
 import rpg_map_generator.Tile;
 
-public class Building implements Tile {
-    public String getCharacter() {
-        return "B";
+public class Building extends Tile {
+    public Building() {
+        character = "B";
+        type = "Building";
     }
-
-    public String getType() {
-        return "Building";
+    public void action() {
     }
 }

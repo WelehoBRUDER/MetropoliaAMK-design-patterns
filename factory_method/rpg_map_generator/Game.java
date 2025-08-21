@@ -4,15 +4,16 @@ import rpg_map_generator.maps.CityMap;
 import rpg_map_generator.maps.WildernessMap;
 
 public class Game {
+    private static Map map;
     public static void main (String[] args) {
         createMap("city");
+        createMap("wilderness");
     }
 
     public static void createMap(String type) {
         int minSize = 5;
         int maxSize = 10;
         int size = (int) (Math.random() * (maxSize - minSize + 1)) + minSize;
-        Map map;
         if (type.equals("wilderness")) {
             map = new WildernessMap(size);
         } else if (type.equals("city")) {
@@ -22,7 +23,7 @@ public class Game {
         }
         for (int y = 0; y < size; y++) {
             for (int x = 0; x < size; x++) {
-                Tile tile = map.createTile();
+                I_Tile tile = map.createTile();
                 map.addTile(x, y, tile);
             }
         }
