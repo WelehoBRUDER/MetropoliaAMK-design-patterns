@@ -1,16 +1,16 @@
 package rpg_map_generator.maps;
 import rpg_map_generator.Map;
-import rpg_map_generator.I_Tile;
-import rpg_map_generator.tiles.Forest;
-import rpg_map_generator.tiles.Road;
-import rpg_map_generator.tiles.Building;
+import rpg_map_generator.Tile;
+import rpg_map_generator.tiles.ForestTile;
+import rpg_map_generator.tiles.RoadTile;
+import rpg_map_generator.tiles.BuildingTile;
 
 public class CityMap extends Map {
-    private I_Tile[][] tiles;
-    private I_Tile[] tileTypes = {
-            new Forest(),
-            new Road(),
-            new Building()
+    private Tile[][] tiles;
+    private Tile[] tileTypes = {
+            new ForestTile(),
+            new RoadTile(),
+            new BuildingTile()
     };
 
     public CityMap(int size) {
@@ -18,7 +18,7 @@ public class CityMap extends Map {
     }
 
     @Override
-    public I_Tile createTile() {
+    public Tile createTile() {
         return tileTypes[(int) (Math.random() * tileTypes.length)];
     }
 }

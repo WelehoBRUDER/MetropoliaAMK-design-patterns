@@ -1,8 +1,8 @@
 package rpg_map_generator.tiles;
 import rpg_map_generator.Tile;
 
-public class Building extends Tile {
-    public Building() {
+public class BuildingTile extends Tile {
+    public BuildingTile() {
         character = "B";
         type = "Building";
     }

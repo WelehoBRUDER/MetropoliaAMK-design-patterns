@@ -1,8 +1,8 @@
 package rpg_map_generator.tiles;
 import rpg_map_generator.Tile;
 
-public class Swamp extends Tile {
-    public Swamp() {
+public class SwampTile extends Tile {
+    public SwampTile() {
         character = "^";
         type = "Swamp";
     }
