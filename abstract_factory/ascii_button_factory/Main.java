@@ -3,27 +3,34 @@ package ascii_button_factory;
 import ascii_button_factory.styles.AFactory;
 import ascii_button_factory.styles.BFactory;
 
+import java.util.Scanner;
+
+
 public class Main {
     public static void main(String[] args) {
-        UIFactory factoryA = new AFactory();
-        UIFactory factoryB = new BFactory();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Choose style (A/B): ");
+        String choice = scanner.nextLine().trim().toUpperCase();
 
-        Button buttonA = factoryA.createButton();
-        Button buttonB = factoryB.createButton();
+        UIFactory factory = choice.equals("A") ? new AFactory() : new BFactory();
 
-        TextField textFieldA = factoryA.createTextField();
-        TextField textFieldB = factoryB.createTextField();
+        Button button = factory.createButton("Button");
+        TextField textField = factory.createTextField("TextField");
+        Checkbox checkbox = factory.createCheckbox("Checkbox", true);
 
-        Checkbox checkboxA = factoryA.createCheckbox();
-        Checkbox checkboxB = factoryB.createCheckbox();
+        button.display();
+        textField.display();
+        checkbox.display();
 
-        buttonA.display();
-        buttonB.display();
+        System.out.println("--- After modification ---");
 
-        textFieldA.display();
-        textFieldB.display();
+        button.setText("NewText");
+        textField.setText("NewTextInField");
+        checkbox.setText("NewCheck");
+        checkbox.setChecked(false);
 
-        checkboxA.display();
-        checkboxB.display();
+        button.display();
+        textField.display();
+        checkbox.display();
     }
 }

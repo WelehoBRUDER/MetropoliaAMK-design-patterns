@@ -3,6 +3,10 @@ package ascii_button_factory.styles.b;
 import ascii_button_factory.Button;
 
 public class ButtonB extends Button {
+    public ButtonB(String txt) {
+        super(txt);
+    }
+
     @Override
     public void display() {
         int length = 20;

@@ -5,6 +5,11 @@ public abstract class Checkbox {
     protected Boolean checked = false;
 
     public abstract void display();
+    
+    public Checkbox(String txt, Boolean chk) {
+        text = txt;
+        checked = chk;
+    }
 
     public void setText(String txt) {
         text = txt;

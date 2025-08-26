@@ -1,7 +1,7 @@
 package ascii_button_factory;
 
 public abstract class UIFactory {
-    public abstract Button createButton();
-    public abstract TextField createTextField();
-    public abstract Checkbox createCheckbox();
+    public abstract Button createButton(String text);
+    public abstract TextField createTextField(String text);
+    public abstract Checkbox createCheckbox(String text, boolean checked);
 }
