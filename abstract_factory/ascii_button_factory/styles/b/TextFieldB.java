@@ -3,7 +3,7 @@ package ascii_button_factory.styles.b;
 import ascii_button_factory.TextField;
 
 public class TextFieldB extends TextField {
-    public void display(String text) {
+    public void display() {
         System.out.println("{" + text + "}");
     }
 }

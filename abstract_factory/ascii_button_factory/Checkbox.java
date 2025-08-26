@@ -1,5 +1,15 @@
 package ascii_button_factory;
 
 public abstract class Checkbox {
-    public abstract void display(String text, Boolean checked);
+    protected String text = "";
+    protected Boolean checked = false;
+
+    public abstract void display();
+
+    public void setText(String txt) {
+        text = txt;
+    }
+    public void setChecked(Boolean chk) {
+        checked = chk;
+    }
 }

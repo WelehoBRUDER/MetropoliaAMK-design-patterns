@@ -4,7 +4,7 @@ import ascii_button_factory.Button;
 
 public class ButtonB extends Button {
     @Override
-    public void display(String text) {
+    public void display() {
         int length = 20;
 
         if (text.length() > length) {

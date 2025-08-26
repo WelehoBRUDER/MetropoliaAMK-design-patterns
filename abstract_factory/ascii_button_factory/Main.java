@@ -17,13 +17,13 @@ public class Main {
         Checkbox checkboxA = factoryA.createCheckbox();
         Checkbox checkboxB = factoryB.createCheckbox();
 
-        buttonA.display("Button A");
-        buttonB.display("Button B");
+        buttonA.display();
+        buttonB.display();
 
-        textFieldA.display("TextField A");
-        textFieldB.display("TextField B");
+        textFieldA.display();
+        textFieldB.display();
 
-        checkboxA.display("Checkbox A", true);
-        checkboxB.display("Checkbox B", false);
+        checkboxA.display();
+        checkboxB.display();
     }
 }

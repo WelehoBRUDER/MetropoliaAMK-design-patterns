@@ -1,5 +1,11 @@
 package ascii_button_factory;
 
 public abstract class Button {
-    public abstract void display(String text);
+    protected String text = "";
+
+    public abstract void display();
+
+    public void setText(String txt) {
+        text = txt;
+    }
 }
