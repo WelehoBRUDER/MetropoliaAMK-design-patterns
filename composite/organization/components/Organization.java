@@ -31,7 +31,7 @@ public class Organization extends Component {
     public Component getChild(int index) {
         return children.get(index);
     }
-    
+
     public void printTotalSalary() {
         double totalSalary = 0;
         for (Component child : children) {
