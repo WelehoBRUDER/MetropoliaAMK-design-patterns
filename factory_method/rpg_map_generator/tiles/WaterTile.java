@@ -3,7 +3,7 @@ import rpg_map_generator.Tile;
 
 public class WaterTile extends Tile {
     public WaterTile() {
-        character = "~";
+        character = "\u001B[34m~";
         type = "Water";
     }
     public void action() {

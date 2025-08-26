@@ -3,7 +3,7 @@ import rpg_map_generator.Tile;
 
 public class SwampTile extends Tile {
     public SwampTile() {
-        character = "^";
+        character = "\u001B[36m^";
         type = "Swamp";
     }
     public void action() {

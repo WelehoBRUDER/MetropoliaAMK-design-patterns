@@ -3,7 +3,7 @@ import rpg_map_generator.Tile;
 
 public class BuildingTile extends Tile {
     public BuildingTile() {
-        character = "B";
+        character = "\u001B[37mB";
         type = "Building";
     }
     public void action() {

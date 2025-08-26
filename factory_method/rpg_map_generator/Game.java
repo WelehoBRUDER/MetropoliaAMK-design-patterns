@@ -3,21 +3,25 @@ package rpg_map_generator;
 import rpg_map_generator.maps.CityMap;
 import rpg_map_generator.maps.WildernessMap;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Game {
     private static Map map;
+    private static String[] types = new String[]{"wilderness", "city"};
     public static void main (String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Specify type of map (city/wilderness): ");
-        String mapType = scanner.nextLine().trim().toLowerCase();
+        System.out.println("1. Wilderness");
+        System.out.println("2. City");
+        System.out.print("Specify type of map: ");
+        int mapType = scanner.nextInt();
         System.out.print("Specify size of map (2-50): ");
         int size = scanner.nextInt();
         if (size < 2 || size > 50) {
             System.out.println("Size must be between 2 and 50.");
             return;
         }
-        createMap(mapType, size);
+        createMap(types[mapType - 1], size);
     }
 
     public static void createMap(String type, int size) {

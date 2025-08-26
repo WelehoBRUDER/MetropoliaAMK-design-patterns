@@ -3,7 +3,7 @@ import rpg_map_generator.Tile;
 
 public class RoadTile extends Tile {
     public RoadTile() {
-        character = "-";
+        character = "\u001B[33m-";
         type = "Road";
     }
     public void action() {
