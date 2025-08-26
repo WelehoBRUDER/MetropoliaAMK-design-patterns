@@ -38,5 +38,11 @@ public class Main {
         sales.add(ivan);
 
         org.printTotalSalary();
+
+        org.remove(ivan);
+
+        org.printTotalSalary();
+
+        org.printData(0);
     }
 }

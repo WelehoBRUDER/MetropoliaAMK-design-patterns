@@ -13,8 +13,15 @@ public class Organization extends Component {
     }
 
     @Override
-    public void printData() {
-
+    public void printData(int data) {
+        String pad = " ".repeat(data * 4);
+        String insidePad = pad + " ".repeat(4);
+        System.out.println(pad + "<Organization>");
+        System.out.println(insidePad + "<Name>" + name + "</Name>");
+        for (Component child : children) {
+            child.printData(data + 1);
+        }
+        System.out.println(pad + "</Organization>");
     }
 
     @Override
@@ -24,7 +31,15 @@ public class Organization extends Component {
 
     @Override
     public void remove(Component component) {
-        children.remove(component);
+        for (Component child : children) {
+            if (child == component) {
+                children.remove(component);
+                return;
+            }
+            if (child instanceof Department) {
+                child.remove(component);
+            }
+        }
     }
 
     @Override

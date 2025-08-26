@@ -11,8 +11,13 @@ public class Employee extends Component {
     }
 
     @Override
-    public void printData() {
-
+    public void printData(int tabs) {
+        String pad = " ".repeat(tabs * 4);
+        String insidePad = pad + " ".repeat(4);
+        System.out.println(pad + "<Employee>");
+        System.out.println(insidePad + "<Name>" + name + "</Name>");
+        System.out.println(insidePad + "<Salary>" + salary + "</Salary>");
+        System.out.println(pad + "</Employee>");
     }
 
     @Override

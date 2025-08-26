@@ -13,8 +13,15 @@ public class Department extends Component {
     }
 
     @Override
-    public void printData() {
-        System.out.println("Department: " + name);
+    public void printData(int tabs) {
+        String pad = " ".repeat(tabs * 4);
+        String insidePad = pad + " ".repeat(4);
+        System.out.println(pad + "<Department>");
+        System.out.println(insidePad + "<Name>" + name + "</Name>");
+        for (Component child : children) {
+            child.printData(tabs + 1);
+        }
+        System.out.println(pad + "</Department>");
     }
 
     @Override
@@ -24,7 +31,15 @@ public class Department extends Component {
 
     @Override
     public void remove(Component component) {
-        children.remove(component);
+        for (Component child : children) {
+            if (child == component) {
+                children.remove(component);
+                return;
+            }
+            if (child instanceof Department) {
+                child.remove(component);
+            }
+        }
     }
 
     @Override
