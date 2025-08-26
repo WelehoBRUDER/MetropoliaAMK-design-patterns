@@ -11,22 +11,27 @@ public class Main {
         Department students = new Department("Students");
         Department teachers = new Department("Teachers");
         Department sales = new Department("Sales");
+        Department interns = new Department("Interns");
 
         org.add(management);
         org.add(teachers);
         management.add(students);
         teachers.add(sales);
+        sales.add(interns);
 
-        Employee alice = new Employee("Alice", 90000);
-        Employee bob = new Employee("Bob", 60000);
-        Employee charlie = new Employee("Charlie", 50000);
-        Employee dave = new Employee("Dave", 40000);
-        Employee eve = new Employee("Eve", 30000);
-        Employee frank = new Employee("Frank", 20000);
-        Employee grace = new Employee("Grace", 10000);
-        Employee heidi = new Employee("Heidi", 5000);
-        Employee ivan = new Employee("Ivan", 3000);
+        Employee markus = new Employee("Markus (CEO)", 25000);
+        Employee alice = new Employee("Alice", 12000);
+        Employee bob = new Employee("Bob", 9500);
+        Employee charlie = new Employee("Charlie", 8000);
+        Employee dave = new Employee("Dave", 8000);
+        Employee eve = new Employee("Eve", 6000);
+        Employee frank = new Employee("Frank", 6200);
+        Employee grace = new Employee("Grace", 7500);
+        Employee heidi = new Employee("Heidi", 7700);
+        Employee ivan = new Employee("Ivan", 4900);
+        Employee judy = new Employee("Judy", 1000);
 
+        org.add(markus);
         management.add(alice);
         management.add(bob);
         teachers.add(charlie);
@@ -36,13 +41,14 @@ public class Main {
         sales.add(grace);
         sales.add(heidi);
         sales.add(ivan);
+        interns.add(judy);
+
+        org.printData(0);
 
         org.printTotalSalary();
 
         org.remove(ivan);
 
         org.printTotalSalary();
-
-        org.printData(0);
     }
 }
