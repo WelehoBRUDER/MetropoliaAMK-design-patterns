@@ -1,8 +1,8 @@
-package ascii_button_factory.styles.a;
+package ascii_button_factory.styles.b;
 
 import ascii_button_factory.Button;
 
-public class ButtonA extends Button {
+public class ButtonB extends Button {
     @Override
     public void display(String text) {
         int length = 20;
@@ -14,9 +14,9 @@ public class ButtonA extends Button {
         int paddingLength = length - text.length();
         int left = paddingLength / 2;
         int right = paddingLength - left;
-        String border = "-".repeat(length);
+        String border = "*".repeat(length);
         System.out.println(" " + border);
-        System.out.println("|" + " ".repeat(left) + text + " ".repeat(right) + "|");
+        System.out.println("{" + " ".repeat(left) + text + " ".repeat(right) + "}");
         System.out.println(" " + border);
     }
 }
