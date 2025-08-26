@@ -41,6 +41,6 @@ public class Organization extends Component {
                 totalSalary += ((Department) child).getTotalSalary();
             }
         }
-        System.out.println("Total Salary: " + totalSalary);
+        System.out.println("Total Salary: " + totalSalary + "$ annually");
     }
 }
