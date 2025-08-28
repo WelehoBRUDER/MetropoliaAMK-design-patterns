@@ -26,18 +26,33 @@ public class Logger {
         }
     }
 
-    public void setFileName(String fileName) throws IOException {
+    public void setFileName(String fileName) {
         if (isOpen) {
-            close();
+            try {
+                close();
+            }
+            catch (IOException e) {
+                System.out.println("Could not close file: " + this.fileName);
+            }
         }
         this.fileName = fileName;
         isOpen = true;
-        fw = new FileWriter(fileName, true);
+        try {
+            fw = new FileWriter(fileName, true);
+        }
+        catch (IOException e) {
+            System.out.println("Could not open/create file: " + this.fileName);
+        }
     }
 
-    public void write(String message) throws IOException {
+    public void write(String message) {
         System.out.println("Writing to " + fileName + ": " + message);
-        fw.write(message + "\n");
+        try {
+            fw.write(message + "\n");
+        }
+        catch (IOException e) {
+            System.out.println("Could not write to file: " + fileName);
+        }
     }
 
     public void close() throws IOException {

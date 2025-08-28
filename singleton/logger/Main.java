@@ -8,6 +8,10 @@ public class Main {
 
         logger.write("First log message");
         logger.write("Test messasge");
+
+        logger.setFileName("another_log.txt");
+        logger.write("Second log message");
+
         logger.close();
     }
 }

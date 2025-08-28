@@ -1,0 +1,3 @@
+Second log message
+Second log message
+Second log message
