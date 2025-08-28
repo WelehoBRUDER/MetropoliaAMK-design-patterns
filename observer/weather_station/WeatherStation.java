@@ -2,17 +2,17 @@ package weather_station;
 
 public class WeatherStation extends Observable {
     private double temperature;
+    private double change;
     private double minTemperature;
     private double maxTemperature;
     private double minVariance;
     private double maxVariance;
-    private int elapsedTime = 0;
 
     public WeatherStation() {
         this.minTemperature = -50.0;
         this.maxTemperature = 50.0;
-        this.minVariance = -1.5;
-        this.maxVariance = 1.5;
+        this.minVariance = -3;
+        this.maxVariance = 3;
         randomizeInitialTemperature();
     }
 
@@ -31,9 +31,13 @@ public class WeatherStation extends Observable {
     public double getTemperature() {
         return temperature;
     }
+    public double getChange() {
+        return change;
+    }
 
     public void updateTemperature() {
         double variance = minVariance + Math.random() * (maxVariance - minVariance);
+        this.change = variance;
         temperature += variance;
         if (temperature < minTemperature) {
             temperature = minTemperature;

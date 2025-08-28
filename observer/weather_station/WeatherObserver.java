@@ -14,6 +14,10 @@ public class WeatherObserver implements Observer {
     @Override
     public void update() {
         String temp = String.format("%.2f", observable.getTemperature());
-        System.out.println(message + " (Weather changed to: " + temp + "°C)");
+        String change = String.format("%.2f", observable.getChange());
+        if (observable.getChange() >= 0) {
+            change = "+" + change;
+        }
+        System.out.println(message + " (Weather changed to: " + temp + "°C, Change: " + change + "°C)");
     }
 }
