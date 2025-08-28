@@ -3,7 +3,7 @@ package weather_station;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Observable {
+public class Observable extends Thread {
     private List<Observer> observers = new ArrayList<>();
 
     public void addObserver(Observer observer) {

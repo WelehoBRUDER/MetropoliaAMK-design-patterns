@@ -6,6 +6,7 @@ public class WeatherStation extends Observable {
     private double maxTemperature;
     private double minVariance;
     private double maxVariance;
+    private int elapsedTime = 0;
 
     public WeatherStation() {
         this.minTemperature = -50.0;
@@ -38,6 +39,18 @@ public class WeatherStation extends Observable {
             temperature = minTemperature;
         } else if (temperature > maxTemperature) {
             temperature = maxTemperature;
+        }
+    }
+
+    public void run() {
+        while (true) {
+            updateTemperature();
+            notifyObservers();
+            try {
+                Thread.sleep(2000); // Update every 2 seconds
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
