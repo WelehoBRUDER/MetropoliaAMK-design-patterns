@@ -47,18 +47,52 @@ public class PlayerCharacter {
 
     public void addXp(int amount) {
         this.xp += amount;
+        this.checkLevelUp();
+    }
+
+    public int random(int min, int max) {
+        return (int)(Math.random() * (max - min + 1)) + min;
     }
 
     public void train() {
         if (this.canTrain()) {
-            this.addXp(10);
-            System.out.println(this.name + " trained and gained 10 XP!");
+            int amount = random(5, 10);
+            System.out.println(this.name + " trained and gained " + amount +" XP!");
+            this.addXp(amount);
         }
     }
 
+    public void meditate() {
+        if (this.canMeditate()) {
+            int xpAmount = random(1, 5);
+            int hpAmount = random(1, 10);
+            System.out.println(this.name + " meditated and gained " + hpAmount + "HP and " + xpAmount + " XP!");
+            this.addXp(xpAmount);
+            this.addHp(hpAmount);
+        }
+    }
+
+    public void fight() {
+        if (this.canFight()) {
+            int damage = random(5, 15);
+            int xpAmount = random(30, 100);
+            System.out.println(this.name + " fought bravely and took " + damage + " damage but gained " + xpAmount + " XP!");
+            this.addHp(-damage);
+            this.addXp(xpAmount);
+        }
+
+    }
+
     public int getRequiredXp() {
-        int[] tiers = {100, 300, 2500};
+        int[] tiers = {50, 300, 1000, 10000};
         return tiers[this.lvl - 1];
+    }
+
+    public void checkLevelUp() {
+        while (this.xp >= this.getRequiredXp() && this.lvl < 4) {
+            this.lvl++;
+            System.out.println(this.name + " leveled up to level " + this.lvl + "!");
+        }
     }
 
     public void printStatus() {

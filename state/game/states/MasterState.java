@@ -11,11 +11,9 @@ public class MasterState extends State {
     }
 
     public void action() {
-        String[] options = {"Train"};
-        switch (this.getGame().readUserChoice(options)) {
-            case 1:
-                //this.getGame().setState(new TicketSelectionState(this.getMachine()));
-                break;
-        }
+        this.getGame().getPC().printStatus();
+        System.out.println("You are a Master. You have reached the pinnacle of your abilities.");
+        System.out.println("There is nothing more to do here. You have completed the game!");
+        this.getGame().setGameOver(true);
     }
 }
