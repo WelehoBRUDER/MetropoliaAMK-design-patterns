@@ -70,6 +70,11 @@ public class PlayerCharacter {
             this.addXp(xpAmount);
             this.addHp(hpAmount);
         }
+        else {
+            // Color this text red
+
+            System.out.println(this.name + " is not experienced enough to meditate!");
+        }
     }
 
     public void fight() {
@@ -79,6 +84,9 @@ public class PlayerCharacter {
             System.out.println(this.name + " fought bravely and took " + damage + " damage but gained " + xpAmount + " XP!");
             this.addHp(-damage);
             this.addXp(xpAmount);
+        }
+        else {
+            System.out.println(this.name + " is not experienced enough to fight!");
         }
 
     }

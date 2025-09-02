@@ -45,22 +45,45 @@ public class Game {
         this.gameOver = gameOver;
     }
 
-    public int readUserChoice(String[] options) {
-        System.out.println("\nSelect an option:");
-        for (int i = 1; i <= options.length; i++) {
-            System.out.println(i + ". " + options[i-1]);
+    public void printPlayerOptions(int level, String[] options) {
+        System.out.println("Choose an option:");
+        for (int i = 0; i < options.length; i++) {
+            // color the option silver if available, dark gray if not
+            String color = (level >= i + 1) ? "\u001B[37m" : "\u001B[90m";
+            System.out.println(color + (i + 1) + ". " + options[i]);
         }
+        // reset color
+        System.out.print("\u001B[0m");
+    }
+
+    public void playerOptions() {
+        int level = this.getPC().getLvl();
+        String[] options = {"💪 Train", "🧘 Meditate", "⚔️ Fight"};
+        printPlayerOptions(level, options);
+        int choice = 0;
         try {
-            int choice = scanner.nextInt();
+            choice = scanner.nextInt();
             if (choice < 1 || choice > options.length) {
                 System.out.println("Invalid choice. Please try again.");
-                return readUserChoice(options);
+                playerOptions();
             }
-            return choice;
         } catch (Exception e) {
             System.out.println("Invalid input. Please enter a number.");
             scanner.next(); // clear invalid input
-            return readUserChoice(options);
+            playerOptions();
+        }
+        switch (choice) {
+            case 1:
+                this.getPC().train();
+                break;
+
+            case 2:
+                this.getPC().meditate();
+                break;
+
+            case 3:
+                this.getPC().fight();
+                break;
         }
     }
 }
