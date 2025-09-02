@@ -6,6 +6,6 @@ public class XMLPrinter extends PrinterDecorator {
         super(printer);
     }
     public void print(String message) {
-        System.out.println("<message>" + message + "</message>");
+        super.print("<message>" + message + "</message>");
     }
 }
