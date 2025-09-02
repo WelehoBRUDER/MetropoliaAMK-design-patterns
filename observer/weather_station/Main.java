@@ -17,5 +17,7 @@ public class Main {
         Thread.sleep(simulationTime * 1000);
 
         ws.removeObserver(obs2);
+
+        System.out.println("Hommat valmiina");
     }
 }

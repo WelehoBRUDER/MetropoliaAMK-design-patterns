@@ -48,4 +48,25 @@ public class PlayerCharacter {
     public void addXp(int amount) {
         this.xp += amount;
     }
+
+    public void train() {
+        if (this.canTrain()) {
+            this.addXp(10);
+            System.out.println(this.name + " trained and gained 10 XP!");
+        }
+    }
+
+    public int getRequiredXp() {
+        int[] tiers = {100, 300, 2500};
+        return tiers[this.lvl - 1];
+    }
+
+    public void printStatus() {
+        String nameString = "<---- " + this.name + " ---->";
+        System.out.println(nameString);
+        System.out.println("HP: " + this.hp);
+        System.out.println("Level: " + this.lvl);
+        System.out.println("XP: " + this.xp + "/" + this.getRequiredXp());
+        System.out.println("-".repeat(nameString.length()));
+    }
 }

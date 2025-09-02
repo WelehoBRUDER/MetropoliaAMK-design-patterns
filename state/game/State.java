@@ -11,5 +11,5 @@ public abstract class State {
         return game;
     }
 
-    abstract void action();
+    public abstract void action();
 }

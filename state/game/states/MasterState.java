@@ -3,20 +3,18 @@ package game.states;
 import game.Game;
 import game.State;
 
-public class NoviceState extends State {
+public class MasterState extends State {
 
-    public NoviceState(Game game) {
+    public MasterState(Game game) {
         super(game);
 
     }
 
     public void action() {
         String[] options = {"Train"};
-        this.getGame().getPC().printStatus();
-        System.out.println("You are a Novice. You can only train to improve your skills.");
         switch (this.getGame().readUserChoice(options)) {
             case 1:
-                this.getGame().getPC().train();
+                //this.getGame().setState(new TicketSelectionState(this.getMachine()));
                 break;
         }
     }
