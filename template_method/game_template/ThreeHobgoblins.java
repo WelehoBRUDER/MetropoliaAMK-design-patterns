@@ -3,6 +3,9 @@ package game_template;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// This game was created spontaneously during a DnD session
+// https://docs.google.com/document/d/1761RtXJjH8jhvbmf3OlmpUtTKGmh-CvFFsg46I6WHxA/edit?usp=sharing
+
 public class ThreeHobgoblins extends Game {
     private ArrayList<Player> players;
     private final Scanner scanner = new Scanner(System.in);
