@@ -5,7 +5,8 @@ import java.util.Scanner;
 public class Player {
     private String name;
     private int points;
-    private Scanner in = new Scanner(System.in);
+    private final Scanner in = new Scanner(System.in);
+    private final Dice dice = new Dice();
 
     public Player(String name, int points) {
         this.name = name;
@@ -70,10 +71,41 @@ public class Player {
 
         System.out.print("Enter your wager (min 2): ");
         int wager = in.nextInt();
+        while (wager < 2 || wager > maxWager) {
+            System.out.println("Your wager must be between 2 and " + maxWager);
+            System.out.print("Enter your wager (min 2): ");
+            wager = in.nextInt();
+        }
+
+        this.addPoints(-wager);
+
+        int result = dice.roll("3d6");
+        System.out.println("🎲 Your die roll is: " + result);
+
+        if (result == turnGoal) {
+            System.out.println("DRAW! Your wager is returned, but you win nothing.");
+            this.addPoints(wager);
+        }
+        else if (result == 3) {
+            System.out.println("CATASTROPHIC LOSS! Your loss is doubled!");
+            this.addPoints(-wager);
+        }
+        else if (result == 18) {
+            System.out.println("JACKPOT! Your win is greater than expected!");
+            this.addPoints(wager * jackpotMultiplier);
+        }
+        else if (result < turnGoal) {
+            System.out.println("LOSE! You just didn't roll high enough.");
+        }
+        else if (result > turnGoal) {
+            System.out.println("WIN! You get to collect your winnings!");
+            this.addPoints(wager * winMultiplier + winBonus);
+        }
     }
 
 
     public void fold() {
-        this.points--;
+        this.addPoints(-1);
+        System.out.println(this.name + " has folded.");
     }
 }
