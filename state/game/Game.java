@@ -9,6 +9,7 @@ public class Game {
     private State state;
     private PlayerCharacter pc;
     private boolean gameOver = false;
+    private final PrintDecorator decorator = new PrintDecorator();
 
     public Game() {
         createPlayer();
@@ -49,11 +50,9 @@ public class Game {
         System.out.println("Choose an option:");
         for (int i = 0; i < options.length; i++) {
             // color the option silver if available, dark gray if not
-            String color = (level >= i + 1) ? "\u001B[37m" : "\u001B[90m";
-            System.out.println(color + (i + 1) + ". " + options[i]);
+            PrintColors color = (level >= i + 1) ? PrintColors.SILVER : PrintColors.GRAY;
+            decorator.print((i + 1) + ". " + options[i], color);
         }
-        // reset color
-        System.out.print("\u001B[0m");
     }
 
     public void playerOptions() {
@@ -64,7 +63,7 @@ public class Game {
         try {
             choice = scanner.nextInt();
             if (choice < 1 || choice > options.length) {
-                System.out.println("Invalid choice. Please try again.");
+                decorator.print("Invalid choice. Please try again.", PrintColors.RED);
                 playerOptions();
             }
         } catch (Exception e) {

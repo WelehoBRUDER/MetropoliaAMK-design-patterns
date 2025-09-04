@@ -5,6 +5,7 @@ public class PlayerCharacter {
     private int hp;
     private int lvl;
     private int xp;
+    private final PrintDecorator decorator = new PrintDecorator();
 
     public PlayerCharacter(String name) {
         this.name = name;
@@ -57,7 +58,8 @@ public class PlayerCharacter {
     public void train() {
         if (this.canTrain()) {
             int amount = random(5, 10);
-            System.out.println(this.name + " trained and gained " + amount +" XP!");
+            String message = this.name + " trained and gained " + amount +" XP!";
+            decorator.print(message, PrintColors.BLUE);
             this.addXp(amount);
         }
     }
@@ -66,14 +68,13 @@ public class PlayerCharacter {
         if (this.canMeditate()) {
             int xpAmount = random(1, 5);
             int hpAmount = random(1, 10);
-            System.out.println(this.name + " meditated and gained " + hpAmount + "HP and " + xpAmount + " XP!");
+            String message = this.name + " meditated and gained " + hpAmount + "HP and " + xpAmount + " XP!";
+            decorator.print(message, PrintColors.BLUE);
             this.addXp(xpAmount);
             this.addHp(hpAmount);
         }
         else {
-            // Color this text red
-
-            System.out.println(this.name + " is not experienced enough to meditate!");
+            decorator.print(this.name + " is not experienced enough to meditate!", PrintColors.RED);
         }
     }
 
@@ -81,12 +82,13 @@ public class PlayerCharacter {
         if (this.canFight()) {
             int damage = random(5, 15);
             int xpAmount = random(30, 100);
-            System.out.println(this.name + " fought bravely and took " + damage + " damage but gained " + xpAmount + " XP!");
+            String message = this.name + " fought bravely and took " + damage + " damage but gained " + xpAmount + " XP!";
+            decorator.print(message, PrintColors.BLUE);
             this.addHp(-damage);
             this.addXp(xpAmount);
         }
         else {
-            System.out.println(this.name + " is not experienced enough to fight!");
+            decorator.print(this.name + " is not experienced enough to fight!", PrintColors.RED);
         }
 
     }
@@ -99,16 +101,20 @@ public class PlayerCharacter {
     public void checkLevelUp() {
         while (this.xp >= this.getRequiredXp() && this.lvl < 4) {
             this.lvl++;
-            System.out.println(this.name + " leveled up to level " + this.lvl + "!");
+            String message = this.name + " leveled up to level " + this.lvl + "!";
+            decorator.print(message, PrintColors.GREEN);
         }
     }
 
     public void printStatus() {
-        String nameString = "<---- " + this.name + " ---->";
-        System.out.println(nameString);
+        decorator.printToLine("<---- ", PrintColors.GOLD);
+        System.out.print(this.name);
+        decorator.printToLine(" ---->", PrintColors.GOLD);
+        System.out.println();
+        int len = ("<---- " + this.name + " ---->").length();
         System.out.println("HP: " + this.hp);
         System.out.println("Level: " + this.lvl);
         System.out.println("XP: " + this.xp + "/" + this.getRequiredXp());
-        System.out.println("-".repeat(nameString.length()));
+        decorator.print("-".repeat(len), PrintColors.GOLD);
     }
 }
