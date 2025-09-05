@@ -80,15 +80,15 @@ public class Player {
 
         if (getPoints() > 1) {
 
-            System.out.println("Maximum wager: " + maxWager);
+            System.out.println("Maximum wager: " + Math.min(maxWager, points));
             System.out.println("Win multiplier: " + winMultiplier + "x");
             System.out.println("Win bonus: " + winBonus);
             System.out.println("Jackpot: " + jackpotMultiplier + "x");
 
             System.out.print("Enter your wager (min 2): ");
             wager = in.nextInt();
-            while (wager < 2 || wager > maxWager) {
-                System.out.println("Your wager must be between 2 and " + maxWager);
+            while (wager < 2 || wager > Math.min(maxWager, points)) {
+                System.out.println("Your wager must be between 2 and " + Math.min(maxWager, points));
                 System.out.print("Enter your wager (min 2): ");
                 wager = in.nextInt();
             }
@@ -96,10 +96,10 @@ public class Player {
         }
 
         else {
-            System.out.println(Colors.BLACK.wrap("You are down to your last point! You must wager it!"));
+            System.out.println(Colors.DANGER.wrap("You are down to your last point! You must wager it!"));
             String confirmation = "";
             while (!confirmation.equalsIgnoreCase("CHALLENGE")) {
-                System.out.print(Colors.BLACK.wrap("Type 'CHALLENGE' to continue: "));
+                System.out.print(Colors.DANGER.wrap("Type 'CHALLENGE' to continue: "));
                 confirmation = in.nextLine();
             }
         }
@@ -108,7 +108,7 @@ public class Player {
 
         int result = dice.roll("3d6");
         System.out.println(Colors.BLUE);
-        printer.printDecoratedCentered("🎲 Your die roll is: " + result, "#", LINE_WIDTH, Colors.BLUE, Colors.RESET);
+        printer.printDecoratedCentered("🎲🎲🎲 Your die roll is: " + result, "#", LINE_WIDTH, Colors.BLUE, Colors.RESET);
         System.out.println(Colors.RESET);
 
         if (result == turnGoal) {
@@ -120,7 +120,7 @@ public class Player {
             this.addPoints(-wager);
         }
         else if (result == 18) {
-            System.out.println(Colors.YELLOW.wrap("JACKPOT!") + " Your win is greater than expected!");
+            System.out.println(Colors.GOLD.wrap("JACKPOT!") + " Your win is greater than expected!");
             this.addPoints(wager * jackpotMultiplier);
         }
         else if (result < turnGoal) {
