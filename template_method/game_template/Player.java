@@ -1,5 +1,8 @@
 package game_template;
 
+import game_template.decors.Colors;
+import game_template.decors.Printer;
+
 import java.util.Scanner;
 
 public class Player {
@@ -9,6 +12,7 @@ public class Player {
     private final Dice dice = new Dice();
     private final Printer printer = new Printer();
     private final int LINE_WIDTH = 35;
+    private boolean defeated = false;
 
     public Player(String name, int points) {
         this.name = name;
@@ -29,14 +33,19 @@ public class Player {
 
     public void addPoints(int points) {
         this.points += points;
-        System.out.println("Points changed by " + points + " ( Total: " + this.points + " )");
+        if (points < 0) {
+            System.out.println("Points " + Colors.RED.wrap("decreased") + " by " + Math.abs(points) + " ( Total: " + this.points + " )");
+        }
+        else {
+        System.out.println("Points " + Colors.GREEN.wrap("increased") + " by " + points + " ( Total: " + this.points + " )");
+        }
     }
 
     public void printStatus() {
-        System.out.println("-".repeat(LINE_WIDTH));
+        System.out.println(Colors.PURPLE.wrap("-".repeat(LINE_WIDTH)));
         System.out.println("\tPlayer: " + name);
         System.out.println("\tPoints: " + points);
-        System.out.println("-".repeat(LINE_WIDTH));
+        System.out.println(Colors.PURPLE.wrap("-".repeat(LINE_WIDTH)));
     }
 
     public void challenge(int turnGoal) {
@@ -67,50 +76,79 @@ public class Player {
                 break;
         }
 
-        System.out.println("Maximum wager: " + maxWager);
-        System.out.println("Win multiplier: " + winMultiplier + "x");
-        System.out.println("Win bonus: " + winBonus);
-        System.out.println("Jackpot: " + jackpotMultiplier + "x");
+        int wager = 1;
 
-        System.out.print("Enter your wager (min 2): ");
-        int wager = in.nextInt();
-        while (wager < 2 || wager > maxWager) {
-            System.out.println("Your wager must be between 2 and " + maxWager);
+        if (getPoints() > 1) {
+
+            System.out.println("Maximum wager: " + maxWager);
+            System.out.println("Win multiplier: " + winMultiplier + "x");
+            System.out.println("Win bonus: " + winBonus);
+            System.out.println("Jackpot: " + jackpotMultiplier + "x");
+
             System.out.print("Enter your wager (min 2): ");
             wager = in.nextInt();
+            while (wager < 2 || wager > maxWager) {
+                System.out.println("Your wager must be between 2 and " + maxWager);
+                System.out.print("Enter your wager (min 2): ");
+                wager = in.nextInt();
+            }
+
+        }
+
+        else {
+            System.out.println(Colors.BLACK.wrap("You are down to your last point! You must wager it!"));
+            String confirmation = "";
+            while (!confirmation.equalsIgnoreCase("CHALLENGE")) {
+                System.out.print(Colors.BLACK.wrap("Type 'CHALLENGE' to continue: "));
+                confirmation = in.nextLine();
+            }
         }
 
         this.addPoints(-wager);
 
         int result = dice.roll("3d6");
-        System.out.println();
-        printer.printDecoratedCentered("🎲 Your die roll is: " + result, "#", LINE_WIDTH);
-        System.out.println();
+        System.out.println(Colors.BLUE);
+        printer.printDecoratedCentered("🎲 Your die roll is: " + result, "#", LINE_WIDTH, Colors.BLUE, Colors.RESET);
+        System.out.println(Colors.RESET);
 
         if (result == turnGoal) {
             System.out.println("DRAW! Your wager is returned, but you win nothing.");
             this.addPoints(wager);
         }
         else if (result == 3) {
-            System.out.println("CATASTROPHIC LOSS! Your loss is doubled!");
+            System.out.println(Colors.RED.wrap("CATASTROPHIC LOSS!") + " Your loss is doubled!");
             this.addPoints(-wager);
         }
         else if (result == 18) {
-            System.out.println("JACKPOT! Your win is greater than expected!");
+            System.out.println(Colors.YELLOW.wrap("JACKPOT!") + " Your win is greater than expected!");
             this.addPoints(wager * jackpotMultiplier);
         }
         else if (result < turnGoal) {
-            System.out.println("LOSE! You just didn't roll high enough.");
+            System.out.println(Colors.RED.wrap("LOSE!") + " You just didn't roll high enough.");
         }
-        else if (result > turnGoal) {
-            System.out.println("WIN! You get to collect your winnings!");
+        else {
+            System.out.println(Colors.GREEN.wrap("WIN!") + " You get to collect your winnings!");
             this.addPoints(wager * winMultiplier + winBonus);
         }
+
+        this.checkDefeat();
     }
 
 
     public void fold() {
         this.addPoints(-1);
         System.out.println(this.name + " has folded.");
+    }
+
+    public void checkDefeat() {
+        if (this.points <= 0) {
+            System.out.println(Colors.RED.wrap("You have run out of points!"));
+            System.out.println(Colors.RED.wrap(this.name + " has been eliminated!"));
+            defeated = true;
+        }
+    }
+
+    public boolean isDefeated() {
+        return defeated;
     }
 }

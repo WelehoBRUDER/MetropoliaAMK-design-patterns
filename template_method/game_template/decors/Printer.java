@@ -1,4 +1,4 @@
-package game_template;
+package game_template.decors;
 
 public class Printer {
     public void printCentered(String text, int width) {
@@ -16,5 +16,12 @@ public class Printer {
         System.out.println(dec.repeat(width));
         printCentered(text, width);
         System.out.println(dec.repeat(width));
+    }
+
+    public void printDecoratedCentered(String text, String dec, int width, Colors decColor, Colors textColor) {
+        System.out.println(decColor + dec.repeat(width) + Colors.RESET);
+        System.out.print(textColor);
+        printCentered(text, width);
+        System.out.println(decColor + dec.repeat(width) + Colors.RESET);
     }
 }
