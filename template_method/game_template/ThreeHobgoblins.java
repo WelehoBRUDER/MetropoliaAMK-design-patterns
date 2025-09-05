@@ -10,6 +10,7 @@ public class ThreeHobgoblins extends Game {
     private ArrayList<Player> players;
     private final Scanner scanner = new Scanner(System.in);
     private final Dice dice = new Dice();
+    private final Printer printer = new Printer();
     private int turnGoal;
     @Override
     public void initializeGame(int numberOfPlayers) {
@@ -30,6 +31,9 @@ public class ThreeHobgoblins extends Game {
 
     @Override
     public void playSingleTurn(int player) {
+        System.out.println();
+        printer.printDecoratedCentered("NEXT TURN BEGINS", "*", 35);
+        System.out.println();
         if (player == 0) {
             this.turnGoal = 0;
             while(!isGoalValid()) {
@@ -40,8 +44,8 @@ public class ThreeHobgoblins extends Game {
         players.get(player).printStatus();
         System.out.println("Current challenge is " + Challenges.find(this.turnGoal));
         System.out.println("Pick an action:");
-        System.out.println("1. Challenge");
-        System.out.println("2. Fold (-1 point)");
+        System.out.println("\t1. Challenge");
+        System.out.println("\t2. Fold (-1 point)");
         int action = scanner.nextInt();
         if (action == 1) {
             players.get(player).challenge(this.turnGoal);

@@ -7,6 +7,8 @@ public class Player {
     private int points;
     private final Scanner in = new Scanner(System.in);
     private final Dice dice = new Dice();
+    private final Printer printer = new Printer();
+    private final int LINE_WIDTH = 35;
 
     public Player(String name, int points) {
         this.name = name;
@@ -27,13 +29,14 @@ public class Player {
 
     public void addPoints(int points) {
         this.points += points;
+        System.out.println("Points changed by " + points + " ( Total: " + this.points + " )");
     }
 
     public void printStatus() {
-        System.out.println("-".repeat(25));
-        System.out.println("Player: " + name);
-        System.out.println("Points: " + points);
-        System.out.println("-".repeat(25));
+        System.out.println("-".repeat(LINE_WIDTH));
+        System.out.println("\tPlayer: " + name);
+        System.out.println("\tPoints: " + points);
+        System.out.println("-".repeat(LINE_WIDTH));
     }
 
     public void challenge(int turnGoal) {
@@ -67,7 +70,7 @@ public class Player {
         System.out.println("Maximum wager: " + maxWager);
         System.out.println("Win multiplier: " + winMultiplier + "x");
         System.out.println("Win bonus: " + winBonus);
-        System.out.println("Jackpot: " + jackpotMultiplier);
+        System.out.println("Jackpot: " + jackpotMultiplier + "x");
 
         System.out.print("Enter your wager (min 2): ");
         int wager = in.nextInt();
@@ -80,7 +83,9 @@ public class Player {
         this.addPoints(-wager);
 
         int result = dice.roll("3d6");
-        System.out.println("🎲 Your die roll is: " + result);
+        System.out.println();
+        printer.printDecoratedCentered("🎲 Your die roll is: " + result, "#", LINE_WIDTH);
+        System.out.println();
 
         if (result == turnGoal) {
             System.out.println("DRAW! Your wager is returned, but you win nothing.");
