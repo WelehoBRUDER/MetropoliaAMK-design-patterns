@@ -35,8 +35,9 @@ public class Controller {
     public void undo() {
         if (!history.isEmpty()) {
             System.out.println("Memento found in history");
+            IMemento currentState = model.createMemento();
             IMemento previousState = history.remove(history.size() - 1);
-            redoHistory.add(previousState);
+            redoHistory.add(currentState);
             model.restoreState(previousState);
             gui.updateGui();
         }
@@ -45,8 +46,9 @@ public class Controller {
     public void redo() {
         if (!redoHistory.isEmpty()) {
             System.out.println("Memento found in redo history");
+            IMemento currentState = model.createMemento();
             IMemento previousState = redoHistory.remove(redoHistory.size() - 1);
-            history.add(previousState);
+            history.add(currentState);
             model.restoreState(previousState);
             gui.updateGui();
         }
@@ -75,5 +77,6 @@ public class Controller {
     private void saveToHistory() {
         IMemento currentState = model.createMemento();
         history.add(currentState);
+        redoHistory = new ArrayList<>();
     }
 }
