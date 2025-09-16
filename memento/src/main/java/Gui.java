@@ -1,5 +1,6 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -46,9 +47,14 @@ public class Gui extends Application {
         label.setPadding(insets);
         Label label2 = new Label("Press Ctrl-Y to restore the last undo.");
         label2.setPadding(insets);
+        Button button = new Button("View state history");
+        button.setPadding(new Insets(10, 10, 10, 10));
+        button.setOnAction(event -> {
+            viewHistory();
+        });
 
         // create a VBox that contains the HBox and the CheckBox
-        VBox vBox = new VBox(hBox, checkBox, label, label2);
+        VBox vBox = new VBox(hBox, checkBox, label, label2, button);
         // call controller when the CheckBox is clicked
         checkBox.setOnAction(event -> {
             controller.setIsSelected(checkBox.isSelected());
@@ -72,6 +78,15 @@ public class Gui extends Application {
 
         stage.setScene(scene);
         stage.setTitle("Memento Pattern Example");
+        stage.show();
+    }
+
+    public void viewHistory() {
+        Stage stage = new Stage();
+        VBox vBox = new VBox();
+        Scene scene = new Scene(vBox);
+        stage.setScene(scene);
+        //stage.setOnHidden(event -> update());
         stage.show();
     }
 
