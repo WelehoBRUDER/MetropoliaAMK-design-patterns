@@ -44,9 +44,11 @@ public class Gui extends Application {
 
         Label label = new Label("Press Ctrl-Z to undo the last change.");
         label.setPadding(insets);
+        Label label2 = new Label("Press Ctrl-Y to restore the last undo.");
+        label2.setPadding(insets);
 
         // create a VBox that contains the HBox and the CheckBox
-        VBox vBox = new VBox(hBox, checkBox, label);
+        VBox vBox = new VBox(hBox, checkBox, label, label2);
         // call controller when the CheckBox is clicked
         checkBox.setOnAction(event -> {
             controller.setIsSelected(checkBox.isSelected());

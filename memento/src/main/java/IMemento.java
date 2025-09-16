@@ -1,6 +1,6 @@
 import java.util.Date;
 
-public interface IMemento {
+public interface IMemento extends Comparable<IMemento> {
     // memento metadata methods
     public int[] getOptions();
     public boolean isSelected();

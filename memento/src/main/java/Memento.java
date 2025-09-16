@@ -19,8 +19,15 @@ public class Memento implements IMemento {
     public boolean isSelected() {
         return isSelected;
     }
-    
+
     public Date getTimeCreated() {
         return timeCreated;
+    }
+
+    @Override
+    public int compareTo(IMemento o) {
+        long a = this.getTimeCreated().getTime();
+        long b = o.getTimeCreated().getTime();
+        return Long.compare(a, b);
     }
 }

@@ -56,16 +56,7 @@ public class Controller {
 
     private void displayAllMementosForDebug() {
         System.out.println("<<< DISPLAYING ALL AVAILABLE MEMENTOS >>>");
-        System.out.println(("--- UNDO HISTORY ---"));
-        for (IMemento memento : history) {
-            int[] options = memento.getOptions();
-            boolean isSelected = memento.isSelected();
-            System.out.println("options: " + options[0] + " " + options[1] + " " + options[2]);
-            System.out.println("isSelected: " + isSelected);
-        }
-        System.out.println("----------------------");
-        System.out.println("=== REDO HISTORY ===");
-        for (IMemento memento : redoHistory) {
+        for (IMemento memento : getFullHistory()) {
             int[] options = memento.getOptions();
             boolean isSelected = memento.isSelected();
             System.out.println("options: " + options[0] + " " + options[1] + " " + options[2]);
@@ -78,6 +69,7 @@ public class Controller {
         IMemento currentState = model.createMemento();
         history.add(currentState);
         redoHistory = new ArrayList<>();
+        displayAllMementosForDebug();
     }
 
     public void jumpBackToUndoState(int state) {
@@ -93,5 +85,13 @@ public class Controller {
         redoHistory.subList(state, redoHistory.size()).clear();
         model.restoreState(fallback);
         gui.updateGui();
+    }
+
+    public List<IMemento> getFullHistory() {
+        List <IMemento> fullHistory = new ArrayList<>();
+        fullHistory.addAll(history);
+        fullHistory.addAll(redoHistory);
+        fullHistory.sort(IMemento::compareTo);
+        return fullHistory;
     }
 }
