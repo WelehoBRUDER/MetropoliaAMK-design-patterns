@@ -79,4 +79,19 @@ public class Controller {
         history.add(currentState);
         redoHistory = new ArrayList<>();
     }
+
+    public void jumpBackToUndoState(int state) {
+        IMemento fallback = history.get(state);
+        history.subList(state, history.size()).clear();
+        redoHistory = new ArrayList<>();
+        model.restoreState(fallback);
+        gui.updateGui();
+    }
+
+    public void jumpBackToRedoState(int state) {
+        IMemento fallback = redoHistory.get(state);
+        redoHistory.subList(state, redoHistory.size()).clear();
+        model.restoreState(fallback);
+        gui.updateGui();
+    }
 }

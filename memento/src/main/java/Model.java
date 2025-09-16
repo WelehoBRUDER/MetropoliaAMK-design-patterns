@@ -39,4 +39,5 @@ public class Model {
         System.out.println("isSelected: " + isSelected);
         System.out.println("State restored");
     }
+
 }
