@@ -17,6 +17,7 @@ public class Gui extends Application {
     private ColorBox colorBox2;
     private ColorBox colorBox3;
     private CheckBox checkBox;
+    private Button button;
 
     public void start(Stage stage) {
 
@@ -47,11 +48,12 @@ public class Gui extends Application {
         label.setPadding(insets);
         Label label2 = new Label("Press Ctrl-Y to restore the last undo.");
         label2.setPadding(insets);
-        Button button = new Button("View state history");
+        button = new Button("View state history");
         button.setPadding(new Insets(10, 10, 10, 10));
         button.setOnAction(event -> {
             viewHistory();
         });
+        button.setDisable(true);
 
         // create a VBox that contains the HBox and the CheckBox
         VBox vBox = new VBox(hBox, checkBox, label, label2, button);
@@ -84,10 +86,35 @@ public class Gui extends Application {
     public void viewHistory() {
         Stage stage = new Stage();
         VBox vBox = new VBox();
+
+        for (IMemento mem : controller.getFullHistory()) {
+            HBox hBox = new HBox();
+            hBox.setSpacing(10);
+            Label label = new Label(mem.getInfo());
+            Button button = new Button("Restore state");
+            button.setPadding(new Insets(10, 10, 10, 10));
+            hBox.getChildren().add(label);
+            hBox.getChildren().add(button);
+            vBox.getChildren().add(hBox);
+
+            button.setOnAction(event -> {
+                controller.jumpBackByDate(mem.getTimeCreated());
+                stage.hide();
+            });
+        }
+
         Scene scene = new Scene(vBox);
         stage.setScene(scene);
-        //stage.setOnHidden(event -> update());
         stage.show();
+    }
+
+    public void updateButton() {
+        if (controller.isHistoryEmpty()) {
+            button.setDisable(true);
+        }
+        else {
+            button.setDisable(false);
+        }
     }
 
     public void updateGui() {
@@ -96,5 +123,6 @@ public class Gui extends Application {
         colorBox2.setColor(controller.getOption(2));
         colorBox3.setColor(controller.getOption(3));
         checkBox.setSelected(controller.getIsSelected());
+        updateButton();
     }
 }

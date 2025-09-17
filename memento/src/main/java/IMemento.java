@@ -5,4 +5,5 @@ public interface IMemento extends Comparable<IMemento> {
     public int[] getOptions();
     public boolean isSelected();
     public Date getTimeCreated();
+    public String getInfo();
 }

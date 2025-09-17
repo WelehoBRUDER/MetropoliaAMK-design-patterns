@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Controller {
@@ -54,22 +55,11 @@ public class Controller {
         }
     }
 
-    private void displayAllMementosForDebug() {
-        System.out.println("<<< DISPLAYING ALL AVAILABLE MEMENTOS >>>");
-        for (IMemento memento : getFullHistory()) {
-            int[] options = memento.getOptions();
-            boolean isSelected = memento.isSelected();
-            System.out.println("options: " + options[0] + " " + options[1] + " " + options[2]);
-            System.out.println("isSelected: " + isSelected);
-        }
-        System.out.println("======================");
-    }
-
     private void saveToHistory() {
         IMemento currentState = model.createMemento();
         history.add(currentState);
         redoHistory = new ArrayList<>();
-        displayAllMementosForDebug();
+        gui.updateButton();
     }
 
     public void jumpBackToUndoState(int state) {
@@ -87,11 +77,37 @@ public class Controller {
         gui.updateGui();
     }
 
+    public void jumpBackByDate(Date date) {
+        boolean fin = false;
+        // Look in undo states
+        for (int i =  0; i < history.size(); i++) {
+            IMemento mem = history.get(i);
+            if (mem.getTimeCreated().getTime() == date.getTime()) {
+                jumpBackToUndoState(i);
+                fin = true;
+                break;
+            }
+        }
+        if (!fin) {
+            for (int i =  redoHistory.size() - 1; i >= 0; i--) {
+                IMemento mem = redoHistory.get(i);
+                if (mem.getTimeCreated().getTime() == date.getTime()) {
+                    jumpBackToRedoState(i);
+                    break;
+                }
+            }
+        }
+    }
+
     public List<IMemento> getFullHistory() {
         List <IMemento> fullHistory = new ArrayList<>();
         fullHistory.addAll(history);
         fullHistory.addAll(redoHistory);
         fullHistory.sort(IMemento::compareTo);
         return fullHistory;
+    }
+
+    public boolean isHistoryEmpty() {
+        return history.isEmpty() && redoHistory.isEmpty();
     }
 }

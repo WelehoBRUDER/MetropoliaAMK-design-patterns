@@ -24,6 +24,11 @@ public class Memento implements IMemento {
         return timeCreated;
     }
 
+    public String getInfo() {
+        String time = this.timeCreated.toString();
+        return "[" + time + "] options: { " + options[0] + "," + options[1] + "," + options[2] + "} | Selected: " + isSelected ;
+    }
+
     @Override
     public int compareTo(IMemento o) {
         long a = this.getTimeCreated().getTime();
