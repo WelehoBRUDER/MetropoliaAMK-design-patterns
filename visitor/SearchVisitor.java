@@ -10,6 +10,15 @@ public class SearchVisitor implements FileSystemVisitor {
         this.criteria = criteria;
     }
 
+    public void reset() {
+        this.files = new ArrayList<>();
+        this.criteria = null;
+    }
+
+    public void setCriteria(String criteria) {
+        this.criteria = criteria;
+    }
+
     @Override
     public void visit(File file) {
         if (file.getExtension().equals(this.criteria)) {

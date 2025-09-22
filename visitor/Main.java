@@ -26,14 +26,32 @@ public class Main {
         SizeCalculatorVisitor sizeCalculatorVisitor = new SizeCalculatorVisitor();
         SearchVisitor searchVisitor = new SearchVisitor("exe");
 
+        // Calculate total size from root
         sizeCalculatorVisitor.visit(dirA);
         double totalSize = sizeCalculatorVisitor.getSize();
-        System.out.println("Total size: " + totalSize + " mb");
+        System.out.println("Total size of directory 'root': " + totalSize + " mb");
 
+        // Reset counter and search only cmx_53
+        sizeCalculatorVisitor.reset();
+        sizeCalculatorVisitor.visit(dirD);
+        System.out.println("Total size of directory 'cmx_53': " + sizeCalculatorVisitor.getSize() + " mb");
+
+        // Find all files with extension .exe
         searchVisitor.visit(dirA);
         List<File> files = searchVisitor.getFiles();
+        System.out.println("Total of " + files.size() + " entries found matching .exe extension:");
         for (File file : files) {
-            System.out.println(file.getFullName());
+            System.out.println(file.getFullName() + " (" + file.getSize() + " mb)");
+        }
+
+        // Reset and instead search for extension .png
+        searchVisitor.reset();
+        searchVisitor.setCriteria("png");
+        searchVisitor.visit(dirA);
+        List<File> files2 = searchVisitor.getFiles();
+        System.out.println("Total of " + files2.size() + " entries found matching .png extension:");
+        for (File file : files2) {
+            System.out.println(file.getFullName() + " (" + file.getSize() + " mb)");
         }
     }
 }

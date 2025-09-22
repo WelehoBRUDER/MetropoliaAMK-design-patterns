@@ -1,7 +1,13 @@
+import java.util.ArrayList;
+
 public class SizeCalculatorVisitor implements FileSystemVisitor {
     private double size;
 
     public SizeCalculatorVisitor() {
+        this.size = 0;
+    }
+
+    public void reset() {
         this.size = 0;
     }
 
