@@ -13,12 +13,16 @@ public class Directory implements FileSystemElement {
         dir.add(element);
     }
 
-    @Override
     public String getName() {
         return name;
     }
 
     public List<FileSystemElement> getDir() {
         return dir;
+    }
+
+    @Override
+    public void accept(FileSystemVisitor visitor) {
+        visitor.visit(this);
     }
 }
