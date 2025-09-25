@@ -33,7 +33,7 @@ public class Game {
         }
         for (int y = 0; y < size; y++) {
             for (int x = 0; x < size; x++) {
-                Tile tile = map.createTile();
+                Integer tile = map.createTile();
                 map.addTile(x, y, tile);
             }
         }

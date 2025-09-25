@@ -1,16 +1,14 @@
 package maps;
 
-import tiles.Tile;
-import tiles.ForestTile;
-import tiles.WaterTile;
-import tiles.SwampTile;
+import tiles.*;
 
 public class WildernessMap extends Map {
+    private TileGraphicFactory tgf = TileGraphicFactory.getInstance();
     private Tile[][] tiles;
-    private Tile[] tileTypes = {
-        new ForestTile(),
-        new WaterTile(),
-        new SwampTile()
+    private Integer[] tileTypes = {
+        tgf.getTileIndex("Forest"),
+        tgf.getTileIndex("Water"),
+        tgf.getTileIndex("Swamp"),
     };
 
     public WildernessMap(int size) {
@@ -18,7 +16,7 @@ public class WildernessMap extends Map {
     }
 
     @Override
-    public Tile createTile() {
+    public Integer createTile() {
         return tileTypes[(int) (Math.random() * tileTypes.length)];
     }
 

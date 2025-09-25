@@ -1,16 +1,14 @@
 package maps;
 
-import tiles.Tile;
-import tiles.ForestTile;
-import tiles.RoadTile;
-import tiles.BuildingTile;
+import tiles.*;
 
 public class CityMap extends Map {
+    private TileGraphicFactory tgf = TileGraphicFactory.getInstance();
     private Tile[][] tiles;
-    private Tile[] tileTypes = {
-            new ForestTile(),
-            new RoadTile(),
-            new BuildingTile()
+    private Integer[] tileTypes = {
+            tgf.getTileIndex("Forest"),
+            tgf.getTileIndex("Road"),
+            tgf.getTileIndex("Building"),
     };
 
     public CityMap(int size) {
@@ -18,7 +16,7 @@ public class CityMap extends Map {
     }
 
     @Override
-    public Tile createTile() {
+    public Integer createTile() {
         return tileTypes[(int) (Math.random() * tileTypes.length)];
     }
 }
