@@ -1,10 +1,13 @@
 package tiles;
 
+import javafx.scene.image.Image;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class TileGraphicFactory {
-    private List<Tile> tilesReference;
+    private final List<Tile> tilesReference;
+    private final List<Image> imagesReference;
     public static TileGraphicFactory instance;
 
     public static TileGraphicFactory getInstance() {
@@ -15,12 +18,18 @@ public class TileGraphicFactory {
     }
 
     public TileGraphicFactory() {
-        this.tilesReference = new ArrayList<Tile>();
+        this.tilesReference = new ArrayList<>();
+        this.imagesReference = new ArrayList<>();
         tilesReference.add(new WaterTile());
         tilesReference.add(new ForestTile());
         tilesReference.add(new SwampTile());
         tilesReference.add(new RoadTile());
         tilesReference.add(new BuildingTile());
+
+        for (Tile tile : tilesReference) {
+            Image img = new Image(tile.getTexturePath());
+            imagesReference.add(img);
+        }
     }
 
     public Integer getTileIndex(String type) {
@@ -39,13 +48,7 @@ public class TileGraphicFactory {
         return tilesReference.get(tileIndex);
     }
 
-
-//    private Integer[][] createFlyweightMap(Tile[][] tiles) {
-//        Integer[][] map = new Integer[tiles.length][tiles[0].length];
-//        for (int y = 0; y < tiles.length; y++) {
-//            for (int x = 0; x < tiles[y].length; x++) {
-//                String type = tiles[y][x].getType();
-//            }
-//        }
-//    }
+    public Image getImage(int tileIndex) {
+        return imagesReference.get(tileIndex);
+    }
 }
