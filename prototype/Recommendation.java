@@ -18,9 +18,29 @@ public class Recommendation implements Cloneable {
             for (Book book : this.books) {
                 clonedRecommendation.books.add(book.clone());
             }
+            return clonedRecommendation;
         }
         catch (CloneNotSupportedException e) {
             throw new AssertionError();
+        }
+    }
+
+    public void removeBook(Book book) {
+        this.books.remove(book);
+    }
+
+    public void addBook(Book book) {
+        this.books.add(book.clone());
+    }
+
+    public void setTargetAudience(String targetAudience) {
+        this.targetAudience = targetAudience;
+    }
+
+    public void showBooks() {
+        System.out.println("Books for " + targetAudience + ":");
+        for (Book book : this.books) {
+            System.out.println(book.toString());
         }
     }
 }
