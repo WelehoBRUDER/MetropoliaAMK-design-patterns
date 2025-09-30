@@ -44,7 +44,7 @@ public class RenderMap extends Application {
             for (int x = 0; x < map.getTiles()[y].length; x++) {
                 int tile = map.getTiles()[y][x];
                 Image img = tgf.getImage(tile);
-                gc.drawImage(img, x * TILE_SIZE, y * TILE_SIZE);
+                gc.drawImage(img, x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
             }
         }
     }
