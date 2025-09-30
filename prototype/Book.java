@@ -18,7 +18,7 @@ public class Book implements Cloneable {
     public Book clone() {
         try {
             Book clonedBook = (Book) super.clone();
-            clonedBook.id = Book.idCounter;
+            clonedBook.id = ++Book.idCounter;
             return clonedBook;
         }
         catch (CloneNotSupportedException e) {
@@ -28,6 +28,6 @@ public class Book implements Cloneable {
 
     @Override
     public String toString() {
-        return String.format("%s - %s - %s | %s", this.title, this.author, this.genre, this.publicationYear);
+        return String.format("%s - %s - %s | %s | ID: %s", this.title, this.author, this.genre, this.publicationYear, this.id);
     }
 }

@@ -16,7 +16,16 @@ public class Main {
 
         library.addBookToRecommendation(0, 2);
         library.addBookToRecommendation(6, 2);
+        library.addBookToRecommendation(1, 1);
+        library.addBookToRecommendation(2, 1);
+        library.addBookToRecommendation(3, 1);
+
+        Recommendation cloned = library.cloneRecommendation(1);
+        cloned.setTargetAudience("Adventure fan");
+        library.addBookToRecommendation(5, 3);
 
         library.getRecommendation(2).showBooks();
+        library.getRecommendation(1).showBooks();
+        library.getRecommendation(3).showBooks();
     }
 }

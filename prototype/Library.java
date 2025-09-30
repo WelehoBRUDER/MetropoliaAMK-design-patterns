@@ -27,4 +27,10 @@ public class Library {
     public void addBookToRecommendation(int bookId, int recommendationId) {
         this.recommendations.get(recommendationId).addBook(books.get(bookId));
     }
+
+    public Recommendation cloneRecommendation(int recommendationId) {
+        Recommendation clonedRecommendation = this.getRecommendation(recommendationId).clone();
+        this.recommendations.add(clonedRecommendation);
+        return clonedRecommendation;
+    }
 }
