@@ -1,6 +1,7 @@
 package tiles;
 
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,11 +26,6 @@ public class TileGraphicFactory {
         tilesReference.add(new SwampTile());
         tilesReference.add(new RoadTile());
         tilesReference.add(new BuildingTile());
-
-        for (Tile tile : tilesReference) {
-            Image img = new Image(tile.getTexturePath());
-            imagesReference.add(img);
-        }
     }
 
     public Integer getTileIndex(String type) {
@@ -50,5 +46,12 @@ public class TileGraphicFactory {
 
     public Image getImage(int tileIndex) {
         return imagesReference.get(tileIndex);
+    }
+
+    public void createImageReferences() {
+        for (Tile tile : tilesReference) {
+            Image img = new Image(tile.getTexturePath());
+            imagesReference.add(img);
+        }
     }
 }

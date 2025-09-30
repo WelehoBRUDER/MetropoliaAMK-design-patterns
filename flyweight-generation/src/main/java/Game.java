@@ -9,21 +9,25 @@ public class Game {
     private static Map map;
     private static String[] types = new String[]{"wilderness", "city"};
     public static void main (String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("1. Wilderness");
-        System.out.println("2. City");
-        System.out.print("Specify type of map: ");
-        int mapType = scanner.nextInt();
-        System.out.print("Specify size of map (2-50): ");
-        int size = scanner.nextInt();
-        if (size < 2 || size > 50) {
-            System.out.println("Size must be between 2 and 50.");
-            return;
-        }
-        createMap(types[mapType - 1], size);
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("1. Wilderness");
+//        System.out.println("2. City");
+//        System.out.print("Specify type of map: ");
+//        int mapType = scanner.nextInt();
+//        System.out.print("Specify size of map (2-25): ");
+//        int size = scanner.nextInt();
+//        if (size < 2 || size > 25) {
+//            System.out.println("Size must be between 2 and 25.");
+//            return;
+//        }
+        int mapType = 2;
+        int size = 25;
+        Map _map = createMap(types[mapType - 1], size);
+        RenderMap.setMap(_map);
+        RenderMap.launch(RenderMap.class);
     }
 
-    public static void createMap(String type, int size) {
+    public static Map createMap(String type, int size) {
         if (type.equals("wilderness")) {
             map = new WildernessMap(size);
         } else if (type.equals("city")) {
@@ -38,5 +42,6 @@ public class Game {
             }
         }
         map.display();
+        return map;
     }
 }

@@ -28,4 +28,8 @@ public abstract class Map {
         }
         tiles[y][x] = tile;
     }
+    
+    public Integer[][] getTiles() {
+        return tiles;
+    }
 }
