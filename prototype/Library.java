@@ -10,8 +10,20 @@ public class Library {
         this.recommendations = new ArrayList<>();
     }
 
+    public void printAllBooks() {
+        System.out.println("\n----------------------------------");
+        for (Book book : this.books) {
+            System.out.println(book);
+        }
+        System.out.println("----------------------------------\n");
+    }
+
     public Recommendation getRecommendation(int recommendationId) {
         return this.recommendations.get(recommendationId);
+    }
+
+    public List<Recommendation> getAllRecommendations() {
+        return this.recommendations;
     }
 
     public void addBook(String title, String author, String genre, int year) {

@@ -38,9 +38,16 @@ public class Recommendation implements Cloneable {
     }
 
     public void showBooks() {
+        System.out.println("\n----------------------------------");
         System.out.println("Books for " + targetAudience + ":");
         for (Book book : this.books) {
             System.out.println(book.toString());
         }
+        System.out.println("----------------------------------\n");
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Target Audience: %s | %s books", targetAudience, books.size());
     }
 }
