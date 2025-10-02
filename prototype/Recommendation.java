@@ -25,8 +25,17 @@ public class Recommendation implements Cloneable {
         }
     }
 
-    public void removeBook(Book book) {
-        this.books.remove(book);
+    public void removeBook(int bookId) {
+        Book book = null;
+        for (Book b : this.books) {
+            if (b.getId() == bookId) {
+                book = b;
+                break;
+            }
+        }
+        if (book != null) {
+            this.books.remove(book);
+        }
     }
 
     public void addBook(Book book) {

@@ -45,4 +45,9 @@ public class Library {
         this.recommendations.add(clonedRecommendation);
         return clonedRecommendation;
     }
+
+    public Book getBook(int bookId) {
+        System.out.println(this.books);
+        return this.books.get(bookId);
+    }
 }

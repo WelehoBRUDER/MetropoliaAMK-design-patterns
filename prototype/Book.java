@@ -26,6 +26,10 @@ public class Book implements Cloneable {
         }
     }
 
+    public int getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return String.format("%s - %s - %s | %s | ID: %s", this.title, this.author, this.genre, this.publicationYear, this.id);
