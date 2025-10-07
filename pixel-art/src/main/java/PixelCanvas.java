@@ -5,8 +5,9 @@ import javafx.scene.paint.Color;
 public class PixelCanvas {
     private Canvas canvas;
     private GraphicsContext gc;
-    private final int PIXEL_SIZE = 32;
-    private final int LINE_WIDTH = 4;
+    private final int PIXEL_SIZE = 64;
+    private final int LINE_WIDTH = 2;
+    private final int TRIANGLE_SIZE = 7;
 
     public PixelCanvas(int width, int height) {
         int xSize = width * PIXEL_SIZE;
@@ -38,6 +39,51 @@ public class PixelCanvas {
             this.gc.setLineWidth(LINE_WIDTH);
             this.gc.setStroke(Color.SILVER);
             this.gc.strokeRect(x + HALF_LINE, y + HALF_LINE, PIXEL_SIZE - LINE_WIDTH, PIXEL_SIZE - LINE_WIDTH);
+            this.drawTrianglesToHighlight(x, y);
+        }
+    }
+
+    // This serves no real point, I just really wanted to make the highlight more interesting ✨
+    public void drawTrianglesToHighlight(int x, int y) {
+        // Calculate position for vertical triangle
+        int topOffsetX = PIXEL_SIZE / 2 - TRIANGLE_SIZE / 2;
+        int topX = x + topOffsetX;
+        int bottomY = y + PIXEL_SIZE;
+        drawVerticalTriangle(topX, y, TRIANGLE_SIZE, false);
+        drawVerticalTriangle(topX, bottomY, TRIANGLE_SIZE, true);
+        // Calculate position for horizontal triangle
+        int leftOffsetY = PIXEL_SIZE / 2 + TRIANGLE_SIZE / 2;
+        int leftY = y + leftOffsetY;
+        int rightX = x + PIXEL_SIZE;
+        drawHorizontalTriangle(x, leftY, TRIANGLE_SIZE, false);
+        drawHorizontalTriangle(rightX, leftY, TRIANGLE_SIZE, true);
+    }
+
+    // Draws vertical triangle from top to bottom, or mirrored if boolean flip is true
+    public void drawVerticalTriangle(int x, int y, int base, boolean flip) {
+        // Offset the starting point by line width
+        y += flip ? -LINE_WIDTH : LINE_WIDTH;
+        // Start drawing the triangle
+        int limit = base / 2;
+        for (int i = 0; i <= limit; i++) {
+            int startX = x + i;
+            int startY = flip ? y - i : y + i;
+            int endX = startX + (base - i * 2);
+            this.gc.strokeLine(startX, startY, endX, startY);
+        }
+    }
+
+    // Draws horizontal triangle from left to right, or mirrored if boolean flip is true
+    public void drawHorizontalTriangle(int x, int y, int base, boolean flip) {
+        // Offset the starting point by line width
+        x += flip ? -LINE_WIDTH : LINE_WIDTH;
+        // Start drawing the triange
+        int limit = base / 2 + 1;
+        for (int i = 0; i <= limit; i++) {
+            int startX = flip ? x - i : x + i;
+            int startY = y - i;
+            int endY = startY - (base - i * 2) - 1;
+            this.gc.strokeLine(startX, startY, startX, endY);
         }
     }
 }
