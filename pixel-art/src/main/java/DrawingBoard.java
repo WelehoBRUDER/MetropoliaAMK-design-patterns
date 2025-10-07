@@ -5,8 +5,16 @@ public class DrawingBoard {
 
     public DrawingBoard(int width, int height) {
         board = new int[height][width];
-        x = 0;
-        y = 0;
+        x = 1;
+        y = 1;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     public void toggle() {
@@ -31,6 +39,18 @@ public class DrawingBoard {
     public void moveCursorRight() {
         x += 1;
         if (x >= board.length) x = board.length - 1;
+    }
+
+    public int[][] getBoard() {
+        return board;
+    }
+
+    public boolean isSelected(int x, int y) {
+        return this.x == x && this.y == y;
+    }
+
+    public boolean isFilled(int x, int y) {
+        return this.getBoard()[y][x] == 1;
     }
 
     public void generateCode() {
