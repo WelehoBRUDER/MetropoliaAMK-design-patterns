@@ -2,8 +2,10 @@ public class DrawingBoard {
     private int[][] board;
     private int x;
     private int y;
+    private int[] size;
 
     public DrawingBoard(int width, int height) {
+        size = new int[]{width, height};
         board = new int[height][width];
         x = 1;
         y = 1;
@@ -19,6 +21,10 @@ public class DrawingBoard {
 
     public void toggle() {
         board[y][x] = board[y][x] == 1 ? 0 : 1;
+    }
+
+    public void clear() {
+        board = new int[size[1]][size[0]];
     }
 
     public void moveCursorUp() {

@@ -5,14 +5,16 @@ public class Controls {
     private Command moveCursorDown;
     private Command togglePixel;
     private Command generateCode;
+    private Command clearCanvas;
 
-    public Controls(Command moveCursorLeft, Command moveCursorRight, Command moveCursorUp, Command moveCursorDown, Command togglePixel, Command generateCode) {
+    public Controls(Command moveCursorLeft, Command moveCursorRight, Command moveCursorUp, Command moveCursorDown, Command togglePixel, Command generateCode, Command clearCanvas) {
         this.moveCursorLeft = moveCursorLeft;
         this.moveCursorRight = moveCursorRight;
         this.moveCursorUp = moveCursorUp;
         this.moveCursorDown = moveCursorDown;
         this.togglePixel = togglePixel;
         this.generateCode = generateCode;
+        this.clearCanvas = clearCanvas;
     }
 
     public void moveCursorLeft() {
@@ -38,4 +40,6 @@ public class Controls {
     public void generateCode() {
         generateCode.execute();
     }
+
+    public void clearCanvas() { clearCanvas.execute(); }
 }

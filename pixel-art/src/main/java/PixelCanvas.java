@@ -25,7 +25,8 @@ public class PixelCanvas {
     }
 
     public void clearCanvas() {
-        this.canvas = new Canvas();
+        gc.setFill(Color.WHITE);
+        gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
     }
 
     public void drawPixel(int x, int y, boolean filled, boolean selected) {

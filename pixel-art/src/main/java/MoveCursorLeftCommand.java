@@ -1,19 +1,15 @@
 public class MoveCursorLeftCommand implements Command {
     private PixelCanvas canvas;
     private DrawingBoard drawingBoard;
+    private MovementCommand movementCommand;
 
     public MoveCursorLeftCommand(PixelCanvas canvas, DrawingBoard drawingBoard) {
         this.canvas = canvas;
         this.drawingBoard = drawingBoard;
+        this.movementCommand = new MovementCommand(this.drawingBoard, this.canvas);
     }
 
     public void execute() {
-        int prevX = drawingBoard.getX();
-        int prevY = drawingBoard.getY();
-        drawingBoard.moveCursorLeft();
-        int currX = drawingBoard.getX();
-        int currY = drawingBoard.getY();
-        canvas.drawPixel(prevX, prevY, drawingBoard.isFilled(prevX, prevY), false);
-        canvas.drawPixel(currX, currY, drawingBoard.isFilled(currX, currY), true);
+        this.movementCommand.move(Direction.LEFT);
     }
 }

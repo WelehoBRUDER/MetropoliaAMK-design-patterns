@@ -1,7 +1,6 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Toggle;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -15,25 +14,22 @@ public class GUI extends Application {
         DrawingBoard drawingBoard = new DrawingBoard(8, 8);
         int[][] board = drawingBoard.getBoard();
         PixelCanvas pixelCanvas = new PixelCanvas(board[0].length, board.length);
-        controlLayout.getChildren().add(pixelCanvas.getCanvas());
 
-        Command moveCursorRightCommand = new MoveCursorRightCommand(pixelCanvas, drawingBoard);
-        Command moveCursorLeftCommand = new MoveCursorLeftCommand(pixelCanvas, drawingBoard);
-        Command moveCursorUpCommand = new MoveCursorUpCommand(pixelCanvas, drawingBoard);
-        Command moveCursorDownCommand = new MoveCursorDownCommand(pixelCanvas, drawingBoard);
-        Command togglePixelCommand = new TogglePixelCommand(pixelCanvas, drawingBoard);
-        Command generateCodeCommand = new GenerateCodeCommand(drawingBoard);
+        Controls controls = getControls(pixelCanvas, drawingBoard);
+        ControlPanel controlPanel = new ControlPanel(controls, pixelCanvas);
 
-        controlScene.setOnKeyPressed(event -> {
+        controlLayout.getChildren().addAll(controlPanel.getHBox(), pixelCanvas.getCanvas());
+        controlScene.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             switch (event.getCode()) {
-                case RIGHT -> moveCursorRightCommand.execute();
-                case LEFT -> moveCursorLeftCommand.execute();
-                case UP -> moveCursorUpCommand.execute();
-                case DOWN -> moveCursorDownCommand.execute();
-                case SPACE -> togglePixelCommand.execute();
-                case ENTER -> generateCodeCommand.execute();
+                case RIGHT -> controls.moveCursorRight();
+                case LEFT -> controls.moveCursorLeft();
+                case UP -> controls.moveCursorUp();
+                case DOWN -> controls.moveCursorDown();
+                case SPACE -> controls.togglePixel();
+                case ENTER -> controls.generateCode();
             }
         });
+        pixelCanvas.getCanvas().requestFocus();
 
 
         for (int y = 0; y < board.length; y++) {
@@ -42,8 +38,20 @@ public class GUI extends Application {
             }
         }
 
-        controlStage.setTitle("Control Panel");
+        controlStage.setTitle("Pixel Art Editor");
         controlStage.setScene(controlScene);
         controlStage.show();
+    }
+
+    private Controls getControls(PixelCanvas pixelCanvas, DrawingBoard drawingBoard) {
+        Command moveCursorRightCommand = new MoveCursorRightCommand(pixelCanvas, drawingBoard);
+        Command moveCursorLeftCommand = new MoveCursorLeftCommand(pixelCanvas, drawingBoard);
+        Command moveCursorUpCommand = new MoveCursorUpCommand(pixelCanvas, drawingBoard);
+        Command moveCursorDownCommand = new MoveCursorDownCommand(pixelCanvas, drawingBoard);
+        Command togglePixelCommand = new TogglePixelCommand(pixelCanvas, drawingBoard);
+        Command generateCodeCommand = new GenerateCodeCommand(drawingBoard);
+        Command clearCanvasCommand = new ClearCanvasCommand(pixelCanvas, drawingBoard);
+
+        return new Controls(moveCursorLeftCommand, moveCursorRightCommand, moveCursorUpCommand, moveCursorDownCommand, togglePixelCommand, generateCodeCommand, clearCanvasCommand);
     }
 }
