@@ -1,6 +1,7 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Toggle;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -17,11 +18,20 @@ public class GUI extends Application {
         controlLayout.getChildren().add(pixelCanvas.getCanvas());
 
         Command moveCursorRightCommand = new MoveCursorRightCommand(pixelCanvas, drawingBoard);
+        Command moveCursorLeftCommand = new MoveCursorLeftCommand(pixelCanvas, drawingBoard);
+        Command moveCursorUpCommand = new MoveCursorUpCommand(pixelCanvas, drawingBoard);
+        Command moveCursorDownCommand = new MoveCursorDownCommand(pixelCanvas, drawingBoard);
+        Command togglePixelCommand = new TogglePixelCommand(pixelCanvas, drawingBoard);
+        Command generateCodeCommand = new GenerateCodeCommand(drawingBoard);
 
         controlScene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
-                case RIGHT:
-                    moveCursorRightCommand.execute();
+                case RIGHT -> moveCursorRightCommand.execute();
+                case LEFT -> moveCursorLeftCommand.execute();
+                case UP -> moveCursorUpCommand.execute();
+                case DOWN -> moveCursorDownCommand.execute();
+                case SPACE -> togglePixelCommand.execute();
+                case ENTER -> generateCodeCommand.execute();
             }
         });
 

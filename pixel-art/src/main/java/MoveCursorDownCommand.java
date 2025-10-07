@@ -1,8 +1,8 @@
-public class MoveCursorRightCommand implements Command {
+public class MoveCursorDownCommand implements Command {
     private PixelCanvas canvas;
     private DrawingBoard drawingBoard;
 
-    public MoveCursorRightCommand(PixelCanvas canvas, DrawingBoard drawingBoard) {
+    public MoveCursorDownCommand(PixelCanvas canvas, DrawingBoard drawingBoard) {
         this.canvas = canvas;
         this.drawingBoard = drawingBoard;
     }
@@ -10,7 +10,7 @@ public class MoveCursorRightCommand implements Command {
     public void execute() {
         int prevX = drawingBoard.getX();
         int prevY = drawingBoard.getY();
-        drawingBoard.moveCursorRight();
+        drawingBoard.moveCursorDown();
         int currX = drawingBoard.getX();
         int currY = drawingBoard.getY();
         canvas.drawPixel(prevX, prevY, drawingBoard.isFilled(prevX, prevY), false);
