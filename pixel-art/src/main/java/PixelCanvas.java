@@ -1,5 +1,6 @@
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.effect.BlendMode;
 import javafx.scene.paint.Color;
 
 public class PixelCanvas {
@@ -14,6 +15,9 @@ public class PixelCanvas {
         int ySize = height * PIXEL_SIZE;
         this.canvas = new Canvas(xSize, ySize);
         this.gc = canvas.getGraphicsContext2D();
+        this.gc.setGlobalBlendMode(BlendMode.SRC_OVER);
+        this.canvas.setScaleX(1);
+        this.canvas.setScaleY(1);
     }
 
     public Canvas getCanvas() {
@@ -25,21 +29,20 @@ public class PixelCanvas {
     }
 
     public void drawPixel(int x, int y, boolean filled, boolean selected) {
-        x = (int) Math.round((double) x * PIXEL_SIZE);
-        y = (int) Math.round((double) y * PIXEL_SIZE);
-        int HALF_LINE = (int) Math.round((double) LINE_WIDTH / 2);
-        double epsilon = 0.1;
-        double epsilon2 = epsilon * 2;
-        this.gc.clearRect(x + epsilon, y + epsilon, PIXEL_SIZE + epsilon2, PIXEL_SIZE + epsilon2);
+        double px = (double) x * PIXEL_SIZE;
+        double py = (double) y * PIXEL_SIZE;
+        double HALF_LINE = (double) LINE_WIDTH / 2;
+        gc.setFill(Color.WHITE);
+        gc.fillRect(px, py, PIXEL_SIZE, PIXEL_SIZE);
         if (filled) {
             this.gc.setFill(Color.BLACK);
-            this.gc.fillRect(x + epsilon, y + epsilon, PIXEL_SIZE + epsilon2, PIXEL_SIZE + epsilon2);
+            this.gc.fillRect(px, py, PIXEL_SIZE, PIXEL_SIZE);
         }
         if (selected) {
             this.gc.setLineWidth(LINE_WIDTH);
-            this.gc.setStroke(Color.SILVER);
-            this.gc.strokeRect(x + HALF_LINE, y + HALF_LINE, PIXEL_SIZE - LINE_WIDTH, PIXEL_SIZE - LINE_WIDTH);
-            this.drawTrianglesToHighlight(x, y);
+            this.gc.setStroke(Color.GOLDENROD);
+            this.gc.strokeRect(px + HALF_LINE, py + HALF_LINE, PIXEL_SIZE - LINE_WIDTH, PIXEL_SIZE - LINE_WIDTH);
+            this.drawTrianglesToHighlight((int) px, (int) py);
         }
     }
 
