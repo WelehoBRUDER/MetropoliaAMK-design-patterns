@@ -44,6 +44,9 @@ public class PixelCanvas {
             this.gc.setStroke(Color.GOLDENROD);
             this.gc.strokeRect(px + HALF_LINE, py + HALF_LINE, PIXEL_SIZE - LINE_WIDTH, PIXEL_SIZE - LINE_WIDTH);
             this.drawTrianglesToHighlight((int) px, (int) py);
+        } else {
+            this.gc.setStroke(Color.SILVER);
+            this.gc.strokeRect(px + HALF_LINE, py + HALF_LINE, PIXEL_SIZE - LINE_WIDTH, PIXEL_SIZE - LINE_WIDTH);
         }
     }
 

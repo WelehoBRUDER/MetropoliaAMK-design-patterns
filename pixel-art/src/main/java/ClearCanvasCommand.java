@@ -11,8 +11,14 @@ public class ClearCanvasCommand implements Command {
     public void execute() {
         drawingBoard.clear();
         canvas.clearCanvas();
-        int x = drawingBoard.getX();
-        int y = drawingBoard.getY();
-        canvas.drawPixel(x, y, false, true);
+        int cursorX = drawingBoard.getX();
+        int cursorY = drawingBoard.getY();
+        int[][] board = drawingBoard.getBoard();
+        for (int y = 0; y < board.length; y++) {
+            for (int x = 0; x < board[y].length; x++) {
+                canvas.drawPixel(x, y, board[y][x] == 1, drawingBoard.isSelected(x, y));
+            }
+        }
+        canvas.drawPixel(cursorX, cursorY, false, true);
     }
 }
