@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2c3701d3-e923-444a-92f3-c8ee7d14f9ec" name="Changes" comment="" />
+    <list default="true" id="2c3701d3-e923-444a-92f3-c8ee7d14f9ec" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pixel-art/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pixel-art/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pixel-art/src/main/java/DrawingBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/pixel-art/src/main/java/DrawingBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pixel-art/src/main/java/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/pixel-art/src/main/java/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pixel-art/src/main/java/PixelCanvas.java" beforeDir="false" afterPath="$PROJECT_DIR$/pixel-art/src/main/java/PixelCanvas.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,12 +46,15 @@
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Omistaja/Documents/GitHub/MetropoliaAMK-design-patterns/pixel-art",
+    "last_opened_file_path": "C:/Users/Juhana/Documents/GitHub/MetropoliaAMK-design-patterns/command/pixel-art",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -66,6 +76,8 @@
       <updated>1759832308249</updated>
       <workItem from="1759832309457" duration="631000" />
       <workItem from="1759845625815" duration="37000" />
+      <workItem from="1759991807425" duration="12000" />
+      <workItem from="1760003174374" duration="337000" />
     </task>
     <servers />
   </component>

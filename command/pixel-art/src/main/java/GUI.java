@@ -11,7 +11,7 @@ public class GUI extends Application {
         Scene controlScene = new Scene(controlLayout);
         Stage controlStage = new Stage();
 
-        DrawingBoard drawingBoard = new DrawingBoard(8, 8);
+        DrawingBoard drawingBoard = new DrawingBoard(12, 10);
         int[][] board = drawingBoard.getBoard();
         PixelCanvas pixelCanvas = new PixelCanvas(board[0].length, board.length);
 

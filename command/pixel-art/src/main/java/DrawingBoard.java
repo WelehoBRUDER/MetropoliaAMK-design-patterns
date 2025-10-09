@@ -44,7 +44,7 @@ public class DrawingBoard {
 
     public void moveCursorRight() {
         x += 1;
-        if (x >= board.length) x = board.length - 1;
+        if (x >= board[0].length) x = board[0].length - 1;
     }
 
     public int[][] getBoard() {
